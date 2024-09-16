@@ -1,11 +1,13 @@
-import { signInAction } from "@/app/actions";
+import { signInWithGoogleAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import Link from "next/link";
 
 export default function Login({ searchParams }: { searchParams: Message }) {
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
   return (
     <form className="flex-1 flex flex-col min-w-64">
       <h1 className="text-2xl font-medium">Sign in</h1>
@@ -33,7 +35,7 @@ export default function Login({ searchParams }: { searchParams: Message }) {
           placeholder="Your password"
           required
         />
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
+        <SubmitButton pendingText="Signing In..." formAction={signInWithGoogleAction}>
           Sign in
         </SubmitButton>
         <FormMessage message={searchParams} />

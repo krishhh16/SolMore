@@ -35,6 +35,24 @@ export const signUpAction = async (formData: FormData) => {
   }
 };
 
+export const signInWithGoogleAction = async () => {
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
+ 
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: 'http://localhost:3000/auth/callback',
+    },
+  })
+  
+  if (data.url) {
+    console.log(data.url);
+    redirect("https://localhost:3000/") // use the redirect API for your server framework
+  }
+};
+
+
+
 export const signInAction = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
