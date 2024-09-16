@@ -22,6 +22,7 @@ function Game() {
 	const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 	const getProgram = () => {
+		//@ts-ignore
 		const provider = new AnchorProvider(connection, wallet, AnchorProvider.defaultOptions())
 		setProvider(provider)
 		const program = new Program<Something>(idlObject, provider)

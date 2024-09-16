@@ -114,6 +114,7 @@ const CharacterEvolution = () => {
         <p className="mt-2 font-semibold">
           {progress === 100
             ? 'You have reached the maximum evolution!'
+            //@ts-ignore
             : `Next Evolution at ${currentStage?.stakeRequirement + 50}%`}
         </p>
       </div>
