@@ -144,7 +144,7 @@ const CharacterShowcase: React.FC = () => {
 
       {/* Credits component with LinkPreview */}
       <div className="mt-16 text-left">
-        <p className="text-sm text-gray-400">
+       <p className="text-sm text-gray-400">
           Developed by
         </p>
         <LinkPreview url="https://github.com/krishhh16">
