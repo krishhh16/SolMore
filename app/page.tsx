@@ -11,10 +11,10 @@ function ParallaxDemo() {
     <div className="min-h-screen w-full relative bg-gradient-to-br from-[#024042] to-[#3A0662]">
       <Navbar />
       <HeroSection />
-      
       <EvolveSection />
-      <Marquee />
+      
       <Game/>
+      <Marquee />
     </div>
   );
 }

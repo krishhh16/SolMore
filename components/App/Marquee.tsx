@@ -87,21 +87,21 @@ const CharacterShowcase: React.FC = () => {
   const repeatedRewards2 = [...rewards2];
 
   return (
-    <div className="flex flex-col items-center justify-center h-[800px] text-white -mt-40">
+    <div className="flex flex-col items-center justify-center min-h-[600px] text-white py-20 px-4">
       {/* Heading */}
-      <h1 className="text-5xl font-bold mb-8 text-center">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-center">
         Unlock New Skins and Rewards!
       </h1>
 
-      <div className="flex items-center justify-center w-full">
-        {/* Left Side - Fill entire space with smaller reward images */}
-        <div className="hidden md:flex flex-wrap justify-center w-1/5">
-          {repeatedRewards.map((reward, index) => (
+      <div className="flex flex-col md:flex-row items-center justify-center w-full">
+        {/* Left Side - Rewards */}
+        <div className="flex flex-wrap justify-center w-full md:w-1/3 mb-8 md:mb-0">
+          {repeatedRewards.slice(0, 8).map((reward, index) => (
             <motion.img
               key={index}
               src={reward}
               alt={`reward-${index}`}
-              className={`h-16 w-16 object-cover m-4`}
+              className={`h-12 w-12 md:h-16 md:w-16 object-cover m-2 md:m-4 ${index >= 5 ? 'hidden md:block' : ''}`}
               animate={controlsLeft}
               custom={index}
               whileHover={{ rotate: 10, scale: 1.1 }}
@@ -112,22 +112,22 @@ const CharacterShowcase: React.FC = () => {
         </div>
 
         {/* Center - Auto Carousel for Character Skins */}
-        <div className="mx-8 flex justify-center items-center">
+        <div className="mx-4 md:mx-8 flex justify-center items-center mb-8 md:mb-0">
           <img
             src={characterSkins[currentSkin]}
             alt="Character Skin"
-            className="h-64 w-64 object-cover"
+            className="h-48 w-48 md:h-64 md:w-64 object-cover"
           />
         </div>
 
-        {/* Right Side - Fill entire space with smaller reward images */}
-        <div className="hidden md:flex flex-wrap justify-center w-1/5">
-          {repeatedRewards2.map((reward, index) => (
+        {/* Right Side - Rewards */}
+        <div className="flex flex-wrap justify-center w-full md:w-1/3">
+          {repeatedRewards2.slice(0, 8).map((reward, index) => (
             <motion.img
               key={index}
               src={reward}
               alt={`reward-${index}`}
-              className={`h-16 w-16 object-cover m-4`}
+              className={`h-12 w-12 md:h-16 md:w-16 object-cover m-2 md:m-4 ${index >= 5 ? 'hidden md:block' : ''}`}
               animate={controlsRight}
               custom={index}
               whileHover={{ rotate: 10, scale: 1.1 }}

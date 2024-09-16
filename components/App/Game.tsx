@@ -27,6 +27,7 @@ function Game() {
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (e.code === 'Space') {
+				e.preventDefault(); // Prevent default space bar behavior
 				if (!gameStarted) {
 					startGame();
 				} else if (gameOver) {
@@ -37,15 +38,16 @@ function Game() {
 						imageElement.style.transition = 'top 0.5s';
 						imageElement.style.top = '150px';
 						setTimeout(() => {
-							imageElement.style.top = '250px';
+							imageElement.style.top = '240px';
 						}, 500);
 					}
 				}
 			}
 		};
 
-		window.addEventListener('keydown', handleKeyDown);
-		return () => window.removeEventListener('keydown', handleKeyDown);
+		// Add event listener to the document instead of window
+		document.addEventListener('keydown', handleKeyDown);
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [gameStarted, gameOver]);
 
 	useEffect(() => {
@@ -81,17 +83,20 @@ function Game() {
 	}, []);
 
 	return (
-		<div className="w-full h-[50vh]">
+		<div className="w-full my-10 h-[50vh] flex flex-col items-center justify-center hidden sm:flex">
 			<div 
-				className="w-[600px] bg-cover bg-[url('/bg-game2.jpg')] relative h-[300px] border overflow-hidden border-black m-auto"
-				tabIndex={0} 
+				className="w-full max-w-[600px] bg-cover bg-[url('/bg-game2.jpg')] relative h-[300px] border-4 border-yellow-400 rounded-lg overflow-hidden shadow-lg m-auto"
+				tabIndex={0}
+				onFocus={() => document.body.style.overflow = 'hidden'}
+				onBlur={() => document.body.style.overflow = 'auto'}
 			>
 				{!gameStarted && (
 					<div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white text-2xl">
-						<div>Welcome to the Game!</div>
+						<div className="text-3xl font-bold mb-4">Welcome to the Game!</div>
+						<div className="text-lg  mb-4">Press SPACE to jump and avoid obstacles</div>
 						<button 
 							onClick={startGame} 
-							className="mt-4 px-4 py-2 bg-white text-black rounded"
+							className="mt-4 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300"
 						>
 							Start Game
 						</button>
@@ -99,10 +104,11 @@ function Game() {
 				)}
 				{gameStarted && gameOver && (
 					<div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white text-2xl">
-						<div>Game Over</div>
+						<div className="text-3xl font-bold mb-4">Game Over</div>
+						<div className="text-lg mb-4">Press SPACE to play again</div>
 						<button 
 							onClick={resetGame} 
-							className="mt-4 px-4 py-2 bg-white text-black rounded"
+							className="mt-4 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300"
 						>
 							Retry
 						</button>
@@ -110,7 +116,7 @@ function Game() {
 				)}
 				{gameStarted && (
 					<>
-						<Image id='sol-image' src={image} alt='sol' className='relative top-[250px]' width={50} height={100}/>
+						<Image id='sol-image' src={image} alt='sol' className='relative top-[240px]' width={50} height={100}/>
 						<img 
 							id='obstacle'
 							className={`absolute top-[250px] w-[50px] h-[50px] ${gameOver ? '' : 'animate-move-left'}`} 
@@ -129,6 +135,10 @@ function Game() {
 							animation: move-left 2s linear infinite;
 							}
 							`}</style>
+			</div>
+			<div className="mt-4 text-white text-center text-lg">
+				<p>Press SPACE to jump and avoid obstacles</p>
+				<p>Click the game area to focus, then use SPACE to play</p>
 			</div>
 		</div>
 	)
