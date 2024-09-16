@@ -5,9 +5,9 @@ import { motion } from 'framer-motion'
 import { Card, CardContent } from "@/components/ui/card"
 
 const evolutionStages = [
-  { id: 1, src: '/baby-sol1.jpeg', alt: 'Evolution Stage 1' },
-  { id: 2, src: '/normal-sol1.jpeg', alt: 'Evolution Stage 2' },
-  { id: 3, src: '/normal-sol3.jpeg', alt: 'Evolution Stage 3' },
+  { id: 1, src: '/baby-sol1.png', alt: 'Evolution Stage 1' },
+  { id: 2, src: '/normal-sol6.png', alt: 'Evolution Stage 2' },
+  { id: 3, src: '/normal-sol7.png', alt: 'Evolution Stage 3' },
 ]
 
 const ArrowIcon = () => (
@@ -29,9 +29,9 @@ const ArrowIcon = () => (
 
 export default function EvolveSection() {
   return (
-    <section className="py-16 px-4">
-      <h2 className="text-3xl font-bold text-center text-white mb-12">
-        Evolve your Solgotchi to be stronger and stronger
+    <section className="py-16 h-[80vh] w-full px-4">
+      <h2 className="text-6xl font-bold text-center text-white mb-12">
+        Evolve your Solgotchi to be <span className="text-blue-500">STRONGER AND STRONGER</span>
       </h2>
       <div className="flex flex-wrap justify-center items-center gap-4">
         {evolutionStages.map((stage, index) => (
@@ -42,13 +42,14 @@ export default function EvolveSection() {
               whileTap={{ scale: 0.95 }}
             >
               <Card className="w-64">
-                <CardContent className="p-4">
+                <CardContent className={`h-64 ${index === 0 ? 'p-16' : 'p-6'}`}>
                   <Image
                     src={stage.src}
                     alt={stage.alt}
                     width={240}
-                    height={300}
-                    className="rounded-lg object-cover"
+                    height={500}
+                    className="rounded-lg object-cover p-"
+                    style={{ backgroundColor: 'transparent' }}
                   />
                 </CardContent>
               </Card>

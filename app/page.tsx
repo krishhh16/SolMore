@@ -3,6 +3,7 @@
 import HeroSection from '@/components/App/HeroSection';
 import Navbar from '@/components/App/Navbar'
 import EvolveSection from '@/components/App/EvolveSection'
+import Marquee from '@/components/App/Marquee';
 
 function ParallaxDemo() {
   return (
@@ -10,6 +11,7 @@ function ParallaxDemo() {
       <Navbar />
       <HeroSection />
       <EvolveSection />
+      <Marquee />
     </div>
   );
 }

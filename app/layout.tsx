@@ -18,8 +18,8 @@ const handjet = Handjet({ subsets: ['latin'], variable: '--font-handjet' });
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Solgotchi",
+  description: "Fastest growing Solana staking platform",
 };
 
 export default function RootLayout({
