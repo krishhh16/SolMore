@@ -8,6 +8,13 @@ import { BoxesCore } from "@/components/ui/background-boxes";
 const handjet = Handjet({ subsets: ['latin'], variable: '--font-handjet' });
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className={`relative h-screen w-full flex items-center justify-center overflow-hidden ${handjet.className} before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-[2px] before:bg-transparent before:blur-sm`}>
       <BoxesCore />
@@ -47,10 +54,17 @@ const Hero = () => {
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button className="bg-teal-500 pointer-events-auto text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-all text-lg font-semibold">
+          <Button 
+            onClick={() => scrollToSection('game-section')}
+            className="bg-teal-500 pointer-events-auto text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-all text-lg font-semibold"
+          >
             Start Staking & Gaming
           </Button>
-          <Button variant="outline" className="bg-transparent pointer-events-auto text-white border-white px-6 py-3 rounded-lg hover:bg-white hover:text-teal-500 transition-all text-lg font-semibold">
+          <Button 
+            onClick={() => scrollToSection('rewards-section')}
+            variant="outline" 
+            className="bg-transparent pointer-events-auto text-white border-white px-6 py-3 rounded-lg hover:bg-white hover:text-teal-500 transition-all text-lg font-semibold"
+          >
             Explore Rewards
           </Button>
         </div>

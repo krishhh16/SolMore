@@ -13,8 +13,12 @@ function ParallaxDemo() {
       <HeroSection />
       <EvolveSection />
       
-      <Game/>
-      <Marquee />
+      <div id="game-section">
+        <Game/>
+      </div>
+      <div id="rewards-section">
+        <Marquee />
+      </div>
     </div>
   );
 }
