@@ -29,9 +29,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${handjet.variable} font-sans`} suppressHydrationWarning>
-      <head>
-      <script src="https://accounts.google.com/gsi/client" async></script>
-      </head>
       <AppWalletProvider>
       <body className="bg-background text-foreground">
         {children}
