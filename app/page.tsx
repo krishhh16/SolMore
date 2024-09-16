@@ -8,7 +8,7 @@ import Game from '@/components/App/Game';
 
 function ParallaxDemo() {
   return (
-    <div className="min-h-screen w-full relative bg-gradient-to-br from-[#024042] to-[#3A0662]">
+    <div className="min-h-screen w-full relative bg-gradient-to-br from-[#024042] via-[#3A0662] to-[#024042]">
       <Navbar />
       <HeroSection />
       <EvolveSection />

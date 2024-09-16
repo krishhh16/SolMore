@@ -21,6 +21,8 @@ function Game() {
 	const wallet = useWallet();
 	const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const getProgram = () => {
 		//@ts-ignore
 		const provider = new AnchorProvider(connection, wallet, AnchorProvider.defaultOptions())
@@ -49,6 +51,7 @@ function Game() {
 
 
 	const Stake = async () => {
+		setIsLoading(true);
 		const stakeAmount = new anchor.BN(0.25 * LAMPORTS_PER_SOL);
 
 		if(publicKey){
@@ -82,6 +85,8 @@ function Game() {
 		  }catch(err:any){
 			console.log(err)
 			toast.error(`Failed with error ${err.message}`)
+		  } finally {
+			setIsLoading(false);
 		  }
 		}
 	}
@@ -144,15 +149,30 @@ function Game() {
 		return () => cancelAnimationFrame(animationFrameId);
 	}, []);
 
+	useEffect(() => {
+		const handleFocus = () => {
+			document.body.style.overflow = 'hidden';
+		};
 
-	
+		const handleBlur = () => {
+			document.body.style.overflow = 'auto';
+		};
+
+		const gameArea = document.querySelector('.game-area');
+		gameArea?.addEventListener('focus', handleFocus);
+		gameArea?.addEventListener('blur', handleBlur);
+
+		return () => {
+			gameArea?.removeEventListener('focus', handleFocus);
+			gameArea?.removeEventListener('blur', handleBlur);
+		};
+	}, []);
+
 	return (
 		<div className="w-full my-10 h-[50vh] flex flex-col items-center justify-center hidden sm:flex">
 			<div
-				className="w-full max-w-[600px] bg-cover bg-[url('/bg-game2.jpg')] relative h-[300px] border-4 border-yellow-400 rounded-lg overflow-hidden shadow-lg m-auto"
+				className="game-area w-full max-w-[600px] bg-cover bg-[url('/bg-game2.jpg')] relative h-[300px] border-4 border-yellow-400 rounded-lg overflow-hidden shadow-lg m-auto"
 				tabIndex={0}
-				onFocus={() => document.body.style.overflow = 'hidden'}
-				onBlur={() => document.body.style.overflow = 'auto'}
 			>
 				{!gameStarted && (
 					<div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-75 text-white text-2xl">
@@ -161,10 +181,10 @@ function Game() {
 						<div className='flex'>
 							<button
 								onClick={staked  ? startGame : Stake}
-								disabled={!publicKey}
-								className="mt-4 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300"
+								disabled={!publicKey || isLoading}
+								className="mt-4 px-6 py-3 bg-yellow-400 text-black rounded-full font-semibold hover:bg-yellow-300 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
 							>
-								{staked ? "Start Game" : "Stake 0.25 SOL(devnet) to start playing"}
+								{isLoading ? "Loading..." : (staked ? "Start Game" : "Stake 0.25 SOL(devnet) to start playing")}
 							</button>
 						</div>
 					</div>
@@ -203,9 +223,8 @@ function Game() {
 							}
 							`}</style>
 			</div>
-			<div className="mt-4 text-white text-center text-lg">
-				<p>Press SPACE to jump and avoid obstacles</p>
-				<p>Click the game area to focus, then use SPACE to play</p>
+			<div className="mt-4 text-white text-center text-3xl">
+				<p>Press <kbd className="px-2 py-1 bg-gray-700 rounded mx-1 font-sans">SPACE</kbd> to jump and avoid obstacles</p>
 			</div>
 			<Toaster />
 		</div>

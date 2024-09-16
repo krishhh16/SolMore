@@ -26,7 +26,7 @@ const Hero = () => {
       >
         <h1 className="text-7xl sm:text-8xl md:text-9xl font-extrabold text-white mb-4 flex flex-wrap justify-center items-center gap-2">
           <span>Stake</span>
-          <span className="text-blue-500">&</span>
+          <span className="text-blue-500 mx-2">&</span>
           <span>Play</span>
         </h1>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white flex flex-wrap items-center justify-center mb-6">

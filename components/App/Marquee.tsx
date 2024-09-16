@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import {LinkPreview} from '../ui/link-preview';
 
 const characterSkins = [
   '/armor.png',
@@ -89,9 +90,12 @@ const CharacterShowcase: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-[600px] text-white py-20 px-4">
       {/* Heading */}
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-center">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-center">
         Unlock New Skins and Rewards!
       </h1>
+      <p className="text-xl md:text-2xl lg:text-3xl text-center mb-8">
+        The more you stake, the more rewards and skins you'll unlock!
+      </p>
 
       <div className="flex flex-col md:flex-row items-center justify-center w-full">
         {/* Left Side - Rewards */}
@@ -136,6 +140,16 @@ const CharacterShowcase: React.FC = () => {
             />
           ))}
         </div>
+      </div>
+
+      {/* Credits component with LinkPreview */}
+      <div className="mt-16 text-left">
+        <p className="text-sm text-gray-400">
+          Developed by
+        </p>
+        <LinkPreview url="https://github.com/krishhh16">
+          <span className="text-sm text-blue-500 hover:underline">@krishhh16</span>
+        </LinkPreview>
       </div>
     </div>
   );
