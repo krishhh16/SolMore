@@ -1,47 +1,59 @@
-// components/Hero.js
+import React from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Handjet } from 'next/font/google';
 import Image from "next/image";
+import { BoxesCore } from "@/components/ui/background-boxes";
 
 const handjet = Handjet({ subsets: ['latin'], variable: '--font-handjet' });
 
 const Hero = () => {
   return (
-    <section 
-    style={{ backgroundImage: 'url(/coin-bg.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'right' }} className={"relative h-screen w-[100vw] flex items-center justify-center overflow-hidden font-handjet" + handjet.className}>
+    <section className={`relative h-screen w-full flex items-center justify-center overflow-hidden ${handjet.className} before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-[2px] before:bg-transparent before:blur-sm`}>
+      <BoxesCore />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10 text-center"
+        className="relative z-10 pointer-events-none text-center px-4"
       >
-        <h1 className="text-5xl md:text-[7rem] font-extrabold text-white mb-4 flex gap-5  items-center">
-          Experience <span className="text-blue-500"> Staking</span>
+        <h1 className="text-7xl sm:text-8xl md:text-9xl font-extrabold text-white mb-4 flex flex-wrap justify-center items-center gap-2">
+          <span>Stake</span>
+          <span className="text-blue-500">&</span>
+          <span>Play</span>
         </h1>
-        <h1 className="text-5xl md:text-6xl font-extrabold text-white flex items-center justify-center">
-          with engaging <span className="text-blue-500 ml-2">gaming</span>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white flex flex-wrap items-center justify-center mb-6">
+          in our
+          <span className="text-blue-500 mx-2">Immersive</span>
           <motion.div
-            whileHover={{ scale: 1.2}}
-            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.2 }}
+            transition={{ duration: 0.5 }}
           >
             <Image 
-              src="/something.jpeg" 
+              src="/adobe-bg.png" 
               alt="Baby Sol" 
-              width={75} 
-              height={75} 
-              className="border mx-4 border-white-1" 
+              width={60} 
+              height={60} 
+              className="mx-2 pointer-events-auto" 
             />
           </motion.div>
-          arena
-        </h1>
-        <p className="text-lg md:text-xl text-white mt-4">
-          Monetize your <span className="text-blue-500">Discord</span> server effortlessly.
+          Arena
+        </h2>
+        <p className="text-lg md:text-xl text-white mt-4 max-w-2xl mx-auto">
+          Experience the future of gaming where your stakes fuel your gameplay. 
+          Earn rewards, level up, and dominate in our unique 
+          <span className="text-blue-500 font-semibold"> staking-powered </span> 
+          gaming ecosystem.
         </p>
 
-        <Button className="mt-6 bg-teal-500 text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-all">
-          Get Started
-        </Button>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Button className="bg-teal-500 pointer-events-auto text-white px-6 py-3 rounded-lg hover:bg-teal-600 transition-all text-lg font-semibold">
+            Start Staking & Gaming
+          </Button>
+          <Button variant="outline" className="bg-transparent pointer-events-auto text-white border-white px-6 py-3 rounded-lg hover:bg-white hover:text-teal-500 transition-all text-lg font-semibold">
+            Explore Rewards
+          </Button>
+        </div>
       </motion.div>
     </section>
   );
